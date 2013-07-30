@@ -194,6 +194,18 @@ In case you're missing your favourite language: There are [cURL](http://develope
 
 The REST API is using [HATEOAS](http://en.wikipedia.org/wiki/HATEOAS) (Hypermedia as the Engine of Application State) which basically means: our API is smart and will tell you what to do next with the result of your request. This allows avoiding hardcoded API endpoints and is *pure awesome* ;-).
 
+The flow is pretty similar to the Express Checkout API:
+
+1. Create a payment: `POST payments/payment`
+	- redirect the user to PayPal and get his approval
+2. Execute the authorized payment: `POST payments/payment/{id}/execute`
+
+For direct processing of credit cards it's even easier:
+
+1. Create the payment: `POST payments/payment`
+	- provide the credit card details as funding instrument or use a tokenized credit card
+
+
 ### Obtaining client credentials
 
 A secret and id that identify your client against our server can be obtained in the [Applications section](http://developer.paypal.com/webapps/developer/applications/myapps) of our [Developer Portal](http://developer.paypal.com).
