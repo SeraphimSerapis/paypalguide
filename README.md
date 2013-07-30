@@ -123,8 +123,7 @@ You will need to pass a list of receivers with only one receiver specified as do
 In the Pay and ExecutePayment call a list of receivers needs to be provided as following:
 
 1. Pay
-	- `receiverList.receiver(0).amount=first_amount
-&receiverList.receiver(0).email=first_receiver_email`
+	- set `receiverList.receiver(0).amount=first_amount`, `receiverList.receiver(0).email=first_receiver_email` and the other attributes
 	- same applies to the other (up to 5 additional) receivers
 2. (Optional) PaymentDetails
 
@@ -163,8 +162,7 @@ Instead of providing the payment command the preapproval command must be specifi
 
 1. Preapproval
 	- response will contain a preapproval key
-2. Redirect the user to `https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-preapproval&preapprovalkey=InsertPreapprovalKeyHere`
-	- redirect to `https://www.paypal.com/...` if not using the Sandbox environment
+2. Redirect the user to: `.../cgi-bin/webscr?cmd=_ap-preapproval&preapprovalkey=yourKey`
 3. (Optional) PreapprovalDetails
 	- allows to query for details for the specified preapproval
 4. Pay
