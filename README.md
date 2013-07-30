@@ -59,7 +59,7 @@ The flow is pretty easy and powerful as it allows to create One Click Payment ex
 ##### Cancelling a Billing Agreement
 
 1. BAUpdate
-	- set *BillingAgreementStatus* to *Canceled*
+	- set `BillingAgreementStatus` to `Canceled`
 	
 #### Parallel Payments
 
@@ -78,9 +78,9 @@ Express Checkout allows to create subscriptions via creating a so called recurri
 PayPal allows to create up to 10 different recurring payments with just one API call. Each of these recurring payments need an assigned recurring payments profile that needs to be created seperately:
 
 1. SetExpressCheckout
-	- set the field *L_BILLINGTYPEn* for each of n (0 up to 9) to RecurringPayments
-	- set *L_BILLINGAGREEMENTDESCRIPTIONn* (n being 0 up to 9) to your subscription's description
-	- set *PAYMENTREQUEST_0_AMT* to 0 if there is no associated purchase - your amount otherwise.
+	- set the field `L_BILLINGTYPEn` for each of n (0 up to 9) to RecurringPayments
+	- set `L_BILLINGAGREEMENTDESCRIPTIONn` (n being 0 up to 9) to your subscription's description
+	- set `PAYMENTREQUEST_0_AMT` to 0 if there is no associated purchase - your amount otherwise.
 2. (Optional) GetExpressCheckoutDetails
 	- allows to get some user details if needed
 3. CreateRecurringPaymentsProfile
@@ -123,8 +123,8 @@ You will need to pass a list of receivers with only one receiver specified as do
 In the Pay and ExecutePayment call a list of receivers needs to be provided as following:
 
 1. Pay
-	- receiverList.receiver(0).amount=first_amount
-&receiverList.receiver(0).email=first_receiver_email
+	- `receiverList.receiver(0).amount=first_amount
+&receiverList.receiver(0).email=first_receiver_email`
 	- same applies to the other (up to 5 additional) receivers
 2. (Optional) PaymentDetails
 
@@ -147,6 +147,30 @@ Chained Payments can be delayed in order to allow the primary receiver to keep t
 
 The documentation provides [a step-by-step guide](http://developer.paypal.com/webapps/developer/docs/classic/adaptive-payments/ht_ap-delayedChainedPayment-curl-etc/) that helps implementing this.
 
+### Preapproved Payments
+
+Preapproved payments can be created up to a total amount and a number of transactions and executed afterwards. The parameters specifying these limitations are:
+
+- `maxAmountPerPayment`
+- `maxNumberOfPayments`
+- `maxTotalAmountOfAllPayments`
+- `startingDate`
+- `endingDate`
+
+Instead of providing the payment command the preapproval command must be specified when redirecting to PayPal:
+
+`_ap-payment` changes to `_ap-preapproval` as documented in the [APCommands](http://developer.paypal.com/webapps/developer/docs/classic/adaptive-payments/integration-guide/APCommands/).
+
+1. Preapproval
+	- response will contain a preapproval key
+2. Redirect the user to `https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-preapproval&preapprovalkey=InsertPreapprovalKeyHere`
+	- redirect to `https://www.paypal.com/...` if not using the Sandbox environment
+3. (Optional) PreapprovalDetails
+	- allows to query for details for the specified preapproval
+4. Pay
+	- include the preapproval key that was obtained earlier
+
+A complete guide on implementing Payment Preapproval can be found [here](http://developer.paypal.com/webapps/developer/docs/classic/adaptive-payments/ht_ap-basicPreapproval-curl-etc/).
 
 ## PayPal Button
 
