@@ -1,17 +1,18 @@
 # PayPal Product 101
 [Tim Messerschmidt](http://timmesserschmidt.com/)  
 29. Juli 2013  
-Version 0.1   
-________
+Version 0.1
 
 ## Content
-1. [Express Checkout](#express-checkout-ec)
-2. [Adaptive Payments](#adaptive-payments)
-3. [PayPal Button](#paypal-button)
-4. [REST API](#rest-api)
-5. [Mobile Payments](#mobile-payments)
-6. [Log In with PayPal](#log-in-with-paypal-liwp)
+1. [Introduction](#introduction)
+2. [Express Checkout](#express-checkout-ec)
+3. [Adaptive Payments](#adaptive-payments)
+4. [PayPal Button](#paypal-button)
+5. [REST API](#rest-api)
+6. [Mobile Payments](#mobile-payments)
+7. [Log In with PayPal](#log-in-with-paypal-liwp)
 
+## Introduction
 
 This guide shall provide a brief overview over the different PayPal products that allow to process payments in (web-)applications. It will be updated over time to allow a quickstart using our products.
 
