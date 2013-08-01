@@ -1,7 +1,7 @@
 # PayPal Product 101
 [Tim Messerschmidt](http://timmesserschmidt.com/)  
 29. Juli 2013  
-Version 0.1
+Version 0.2
 
 ## Content
 1. [Introduction](#introduction)
@@ -78,9 +78,9 @@ Express Checkout allows to create subscriptions via creating a so called recurri
 PayPal allows to create up to 10 different recurring payments with just one API call. Each of these recurring payments need an assigned recurring payments profile that needs to be created seperately:
 
 1. SetExpressCheckout
-	- set the field `L_BILLINGTYPEn` for each of n (0 up to 9) to RecurringPayments
+	- set the field `L_BILLINGTYPEn` for each of n (0 up to 9) to `RecurringPayments`
 	- set `L_BILLINGAGREEMENTDESCRIPTIONn` (n being 0 up to 9) to your subscription's description
-	- set `PAYMENTREQUEST_0_AMT` to 0 if there is no associated purchase - your amount otherwise.
+	- set `PAYMENTREQUEST_0_AMT` to `0` if there is no associated purchase - your amount otherwise.
 2. (Optional) GetExpressCheckoutDetails
 	- allows to get some user details if needed
 3. CreateRecurringPaymentsProfile
@@ -204,6 +204,38 @@ For direct processing of credit cards it's even easier:
 
 1. Create the payment: `POST payments/payment`
 	- provide the credit card details as funding instrument or use a tokenized credit card
+	
+### Vault
+
+The vault API is a comfortable solution that returns a tokenized credit card instead of forcing the developer to provide all credit card details for each payment API call. Basically the API has 3 functionalities: storing a card, deleting a card and returnign all stored cards.
+
+- Store the card: `POST vault/credit-card` 
+- Look up a card: `GET vault/credit-card/{credit-card-id}`
+- Delete a card: DELETE https://api.paypal.com/v1/vault/credit-card/{credit-card-id}`
+
+### Authorize & Capture
+
+This mechanism allows to put a hold on somebody's credit card or PayPal account and charge later. The final amount that is being charged in the capture call doesn't have to be as high as the preauthorized amount (`captured <= preauthorized`).
+
+1. Create an authorization `POST payments/payment`
+	- the intent must be `authroize` instead of `sale`
+2. Capture the preauthorized payment `POST payments/authorization/{authorization_id}/capture`
+	- pass the `authorization_id` that was obtained in the first call
+	- if not charging the total amount & not planning to charge the left amount: set `is_final_capture` to `true`
+	
+You can look up existing authorizations. This returns useful information like the amount, current state and how long the authorization is valid:
+
+1. `GET payments/authorization/{id}`
+	- The id was passed as response after creating the authorization
+
+Also you're able to void the authorization if you're not going to capture it:
+
+1. Void the authorization: `POST /payments/authorization/{authorization_id}/void`
+	- Again you'll need to pass the id that was passed when creating the authorization
+
+When charging against a PayPal account you can reauthorize the authorization. This should be done after the initial 3-day honor period. You can reauthorize **once** between **4** and **29** days. The reauthorized payment can be either 115% or up to 75$ higher than the original amount (whatever applies first).
+
+1. Reauthorize: `POST payments/authorization/{authorization_id}/reauthorize`
 
 
 ### Obtaining client credentials
