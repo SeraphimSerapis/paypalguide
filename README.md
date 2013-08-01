@@ -222,20 +222,26 @@ This mechanism allows to put a hold on somebody's credit card or PayPal account 
 2. Capture the preauthorized payment `POST payments/authorization/{authorization_id}/capture`
 	- pass the `authorization_id` that was obtained in the first call
 	- if not charging the total amount & not planning to charge the left amount: set `is_final_capture` to `true`
+
+#### Look up
 	
 You can look up existing authorizations. This returns useful information like the amount, current state and how long the authorization is valid:
 
 1. `GET payments/authorization/{id}`
 	- The id was passed as response after creating the authorization
+	
+#### Void
 
 Also you're able to void the authorization if you're not going to capture it:
 
 1. Void the authorization: `POST /payments/authorization/{authorization_id}/void`
 	- Again you'll need to pass the id that was passed when creating the authorization
+	
+#### Reauthorize
 
 When charging against a PayPal account you can reauthorize the authorization. This should be done after the initial 3-day honor period. You can reauthorize **once** between **4** and **29** days. The reauthorized payment can be either 115% or up to 75$ higher than the original amount (whatever applies first).
 
-1. Reauthorize: `POST payments/authorization/{authorization_id}/reauthorize`
+1. Reauthorize an existant authorization: `POST payments/authorization/{authorization_id}/reauthorize`
 
 
 ### Obtaining client credentials
