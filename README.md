@@ -274,4 +274,4 @@ In April 2013 Access got was relaunched as *Log In with PayPal* and enables a fe
 
 ### Seamless Checkout
 
-One of the greatest features that LIWPP enables is called Seamless Checkout. In a timeframe of 1 hour after the last login with PayPal a token can be used once to skip the authorization part of PayPal payments. This feature is available with Express Checkout version 94 and above and is documented over [here](http://developer.paypal.com/webapps/developer/docs/integration/direct/log-in-with-paypal/detailed/#seamlesscheckout).
+One of the greatest features that LIWPP enables is called Seamless Checkout. In a timeframe of 1 hour after the last login with PayPal a token can be used **once** to skip the authorization part of PayPal payments. This feature is available with Express Checkout version **94** and above and is documented over [here](http://developer.paypal.com/webapps/developer/docs/integration/direct/log-in-with-paypal/detailed/#seamlesscheckout).
