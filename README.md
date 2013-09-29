@@ -218,7 +218,7 @@ The vault API is a comfortable solution that returns a tokenized credit card ins
 This mechanism allows to put a hold on somebody's credit card or PayPal account and charge later. The final amount that is being charged in the capture call doesn't have to be as high as the preauthorized amount (`captured <= preauthorized`).
 
 1. Create an authorization `POST payments/payment`
-	- the intent must be `authroize` instead of `sale`
+	- the intent must be `authorize` instead of `sale`
 2. Capture the preauthorized payment `POST payments/authorization/{authorization_id}/capture`
 	- pass the `authorization_id` that was obtained in the first call
 	- if not charging the total amount & not planning to charge the left amount: set `is_final_capture` to `true`
