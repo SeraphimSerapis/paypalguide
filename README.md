@@ -1,7 +1,7 @@
 # PayPal Product 101
 [Tim Messerschmidt](http://timmesserschmidt.com/)  
-29. Juli 2013  
-Version 0.2
+28. September 2013  
+Version 0.3
 
 ## Content
 1. [Introduction](#introduction)
@@ -266,8 +266,12 @@ The newest versions of the SDK and sample apps can be found at GitHub: [iOS](htt
 
 The [Mobile Payments Library](http://developer.paypal.com/webapps/developer/docs/classic/mobile/gs_MPL/) allows payments based on Adaptive Payments and is ideal for marketplaces and P2P (peer to peer) applications. There is a version for Android and iOS but we don't plan to release additional feature updates.
 
-## Log In with PayPal (LIWP)
+## Log In with PayPal (LIWPP)
 
 This API launched in 2011 an is known as *PayPal Access*. Access used OAuth 1.0a and OpenID to allow authenticating users via their existing PayPal accounts. Furthermore some profile information like the main shipping address and date of birth can be obtained in order to provide a nice onboarding experience for users.
 
-In April 2013 Access got was relaunched as *Log In with PayPal* and enables a feature called *Seamless Checkout* which uses an obtained token that allows skipping logging again after using LIWP. The seamless checkoht works with Express Checkout version 94+ and the new REST API. Instead of sticking with OAuth 1.0a LIWP uses OpenID Connect which uses OAuth 2.0 for user authentication.
+In April 2013 Access got was relaunched as *Log In with PayPal* and enables a feature called *Seamless Checkout* which uses an obtained token that allows skipping logging again after using LIWPP. The seamless checkoht works with Express Checkout version 94+ and the new REST API. Instead of sticking with OAuth 1.0a LIWPP uses OpenID Connect which uses OAuth 2.0 for user authentication.
+
+### Seamless Checkout
+
+One of the greatest features that LIWPP enables is called Seamless Checkout. In a timeframe of 1 hour after the last login with PayPal a token can be used to skip the authorization part of PayPal payments. This feature is available with Express Checkout version 94 and above and is documented over [here](http://developer.paypal.com/webapps/developer/docs/integration/direct/log-in-with-paypal/detailed/#seamlesscheckout).
