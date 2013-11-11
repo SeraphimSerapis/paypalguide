@@ -211,7 +211,7 @@ The vault API is a comfortable solution that returns a tokenized credit card ins
 
 - Store the card: `POST vault/credit-card` 
 - Look up a card: `GET vault/credit-card/{credit-card-id}`
-- Delete a card: `DELETE https://api.paypal.com/v1/vault/credit-card/{credit-card-id}`
+- Delete a card: `DELETE vault/credit-card/{credit-card-id}`
 
 ### Authorize & Capture
 
