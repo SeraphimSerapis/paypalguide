@@ -258,7 +258,7 @@ The Mobile SDK for iOS got released in March 2013 and the Android library in May
 
 The credit card flow can be either supercharged with credit card scannign via [card.io](http://www.card.io/) or entering the card's details manually.
 
-Right now the SDK only allows one time payments. We'll be adding more functionality like enabling subscriptions, parallel and chained payments in future updates.
+On February 24th version 2 of the mSDK got released and brought support for Future Payments and Authorizations. Authorizations are working exactly like described under the REST section of this guide. Future Payments is a feature that enables repeating payments without requiring the user to authorize a payment via logging in.
 
 The newest versions of the SDK and sample apps can be found at GitHub: [iOS](http://github.com/paypal/PayPal-iOS-SDK/) & [Android](http://github.com/paypal/PayPal-Android-SDK/)
 
