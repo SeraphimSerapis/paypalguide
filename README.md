@@ -1,7 +1,7 @@
 # PayPal Product 101
 [Tim Messerschmidt](http://timmesserschmidt.com/)  
-28. September 2013  
-Version 0.3
+February 27th 2014
+Version 0.4
 
 ## Content
 1. [Introduction](#introduction)
@@ -33,7 +33,7 @@ Traditional eCommerce one time purchases get implemented by utilizing 3 simple A
 	- allows to get user details before the actual pamyent happens
 3. DoExpressCheckoutPayment
 	- this API call actually executes the created & authenticated payment using a token
-	
+
 #### Shortcut
 
 Shortcut is a way of implementing PayPal Express Checkout that allows skipping the actual registration process at the merchant's page and provides a callback that provides user details after the checkout itself. This is an amazing feature that provides great conversion rates as the user is not require to enter tons of details while the merchant still is able to access needed information like the customer's name, shipping address and Email.
@@ -50,7 +50,7 @@ The flow is pretty easy and powerful as it allows to create One Click Payment ex
 	- define the amount as 0 as we don't create a particular payment yet
 2. CreateBillingAgreement
 	- this returns a billing agreement id that will be used for future transactions
-	
+
 ##### Paying with Reference Transactions:
 
 1. DoReferenceTransaction
@@ -60,7 +60,7 @@ The flow is pretty easy and powerful as it allows to create One Click Payment ex
 
 1. BAUpdate
 	- set `BillingAgreementStatus` to `Canceled`
-	
+
 #### Parallel Payments
 
 This is pretty similar to a regular Express Checkout call except this time you'll be able to define multiple Payment Requests with multiple Receivers:
@@ -85,7 +85,7 @@ PayPal allows to create up to 10 different recurring payments with just one API 
 	- allows to get some user details if needed
 3. CreateRecurringPaymentsProfile
 	- this is where you define how often you want to charge the user (daily, weekly, monthly, annual), how much and if it's a *digital* or *physical* good.
-	
+
 Please check out [the documentation](http://developer.paypal.com/webapps/developer/docs/classic/express-checkout/integration-guide/ECRecurringPayments/) for further details.
 
 ## Adaptive Payments
@@ -204,12 +204,12 @@ For direct processing of credit cards it's even easier:
 
 1. Create the payment: `POST payments/payment`
 	- provide the credit card details as funding instrument or use a tokenized credit card
-	
+
 ### Vault
 
 The vault API is a comfortable solution that returns a tokenized credit card instead of forcing the developer to provide all credit card details for each payment API call. Basically the API has 3 functionalities: storing a card, deleting a card and returnign all stored cards.
 
-- Store the card: `POST vault/credit-card` 
+- Store the card: `POST vault/credit-card`
 - Look up a card: `GET vault/credit-card/{credit-card-id}`
 - Delete a card: `DELETE vault/credit-card/{credit-card-id}`
 
@@ -224,19 +224,19 @@ This mechanism allows to put a hold on somebody's credit card or PayPal account 
 	- if not charging the total amount & not planning to charge the left amount: set `is_final_capture` to `true`
 
 #### Look up
-	
+
 You can look up existing authorizations. This returns useful information like the amount, current state and how long the authorization is valid:
 
 1. `GET payments/authorization/{id}`
 	- The id was passed as response after creating the authorization
-	
+
 #### Void
 
 Also you're able to void the authorization if you're not going to capture it:
 
 1. Void the authorization: `POST /payments/authorization/{authorization_id}/void`
 	- Again you'll need to pass the id that was passed when creating the authorization
-	
+
 #### Reauthorize
 
 When charging against a PayPal account you can reauthorize the authorization. This should be done after the initial 3-day honor period. You can reauthorize **once** between **4** and **29** days. The reauthorized payment can be either 115% or up to 75$ higher than the original amount (whatever applies first).
